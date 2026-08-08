@@ -1,51 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mobile Repairing & Home Pickup"
+        android:text="Mobile Repairing &amp; Accessories"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp" />
+        app:layout_bottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Aapka Naam"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mobile Number"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/etModel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mobile Model & Issue (e.g., Display, Battery)" />
-
-    <EditText
-        android:id="@+id/etAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Pickup Address"
-        android:lines="3" />
-
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Book Home Pickup"
-        android:layout_marginTop="20dp" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
