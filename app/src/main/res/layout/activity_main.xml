@@ -79,7 +79,9 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <!-- Service 1 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardDisplay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -92,7 +94,9 @@
                 android:textColor="#333333" />
         </androidx.cardview.widget.CardView>
 
+        <!-- Service 2 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardBattery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -102,6 +106,51 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="🔋   Battery &amp; Charging Jack Repair"
+                android:textColor="#333333" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Service 3 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardWater"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="6dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="💧   Water Damage &amp; Motherboard Repair"
+                android:textColor="#333333" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Service 4 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSoftware"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="6dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="🔒   Software Unlocking &amp; Flashing"
+                android:textColor="#333333" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Service 5 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAccessories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="6dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="🎧   Mobile Accessories, Covers &amp; Glass"
                 android:textColor="#333333" />
         </androidx.cardview.widget.CardView>
 
@@ -131,6 +180,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="Open All Days: 9:00 AM - 9:00 PM"
+                    android:textColor="#666666" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact us for instant repair quotes."
                     android:textColor="#666666" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
