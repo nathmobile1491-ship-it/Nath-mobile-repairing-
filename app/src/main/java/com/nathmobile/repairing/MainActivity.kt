@@ -1,12 +1,16 @@
-package com.nathmobile.repairing
+package com.example.nathmobilerepairing
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 
 class MainActivity : AppCompatActivity() {
+
+    // ⚠️ Yahan "91XXXXXXXXXX" ki jagah apna asli mobile number daalein
+    private val shopPhoneNumber = "91XXXXXXXXXX" 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,24 +18,44 @@ class MainActivity : AppCompatActivity() {
 
         val btnCall = findViewById<Button>(R.id.btnCall)
         val btnWhatsapp = findViewById<Button>(R.id.btnWhatsapp)
+        val cardShop = findViewById<CardView>(R.id.cardShop)
 
-        // Call Action Button
+        val cardDisplay = findViewById<CardView>(R.id.cardDisplay)
+        val cardBattery = findViewById<CardView>(R.id.cardBattery)
+
+        // 1. CALL US Button
         btnCall.setOnClickListener {
-            val phoneNumber = "9758149149" // Yahan apna Mobile Number daalein
             val intent = Intent(Intent.ACTION_DIAL).apply {
-                data = Uri.parse("tel:$phoneNumber")
+                data = Uri.parse("tel:$shopPhoneNumber")
             }
             startActivity(intent)
         }
 
-        // WhatsApp Action Button
+        // 2. WHATSAPP Button
         btnWhatsapp.setOnClickListener {
-            val whatsappNumber = "919758149149" // Yahan apna Mobile Number (91 ke saath) daalein
-            val url = "https://api.whatsapp.com/send?phone=$whatsappNumber&text=Hello,%20mujhe%20repairing%20inquiry%20karni%20hai."
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(url)
-            }
-            startActivity(intent)
+            openWhatsAppWithMessage("Hi, mujhe mobile repair ke baare mein enquiry karni hai.")
         }
+
+        // 3. Service Cards Enquiry
+        cardDisplay.setOnClickListener {
+            openWhatsAppWithMessage("Hi, mujhe Display & Touch Replacement ka price jaan na hai.")
+        }
+
+        cardBattery.setOnClickListener {
+            openWhatsAppWithMessage("Hi, mujhe Battery & Charging Jack repair ka estimate chahiye.")
+        }
+
+        // 4. VISIT OUR SHOP (Fixed Google Maps Link)
+        cardShop.setOnClickListener {
+            val mapUrl = "https://www.google.com/maps/search/?api=1&query=Nath+Mobile+Repairing"
+            val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl))
+            startActivity(mapIntent)
+        }
+    }
+
+    private fun openWhatsAppWithMessage(message: String) {
+        val url = "https://wa.me/$shopPhoneNumber?text=${Uri.encode(message)}"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 }
