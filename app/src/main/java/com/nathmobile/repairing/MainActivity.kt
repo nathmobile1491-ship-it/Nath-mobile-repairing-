@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 
 class MainActivity : AppCompatActivity() {
 
-    // ⚠️ Yahan "919758149149" ki jagah apna asli mobile number daalein
+    // Apna asli mobile number daalein
     private val shopPhoneNumber = "919758149149" 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val btnWhatsapp = findViewById<Button>(R.id.btnWhatsapp)
         val cardShop = findViewById<CardView>(R.id.cardShop)
 
-        // 1. CALL US Button
+        // 1. CALL US
         btnCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$shopPhoneNumber")
@@ -28,12 +28,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 2. WHATSAPP Button
+        // 2. WHATSAPP
         btnWhatsapp.setOnClickListener {
             openWhatsAppWithMessage("Hi, mujhe mobile repair ke baare mein enquiry karni hai.")
         }
 
-        // 3. VISIT OUR SHOP (Google Maps Link)
+        // 3. VISIT OUR SHOP
         cardShop.setOnClickListener {
             val mapUrl = "https://www.google.com/maps/search/?api=1&query=Nath+Mobile+Repairing"
             val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl))
