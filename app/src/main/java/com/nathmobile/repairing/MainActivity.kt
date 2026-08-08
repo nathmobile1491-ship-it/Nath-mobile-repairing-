@@ -1,4 +1,4 @@
-package com.example.nathmobilerepairing
+package com.nathmobile.repairing
 
 import android.content.Intent
 import android.net.Uri
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             openWhatsAppWithMessage("Hi, mujhe Battery & Charging Jack repair ka estimate chahiye.")
         }
 
-        // 4. VISIT OUR SHOP (Fixed Google Maps Link)
+        // 4. VISIT OUR SHOP
         cardShop.setOnClickListener {
             val mapUrl = "https://www.google.com/maps/search/?api=1&query=Nath+Mobile+Repairing"
             val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl))
