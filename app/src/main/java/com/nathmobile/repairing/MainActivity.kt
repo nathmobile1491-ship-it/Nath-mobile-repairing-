@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         // Call Action Button
         btnCall.setOnClickListener {
-            val phoneNumber = "9876543210" // Apna phone number yahan change karein
+            val phoneNumber = "9758149149" // Apna phone number yahan change karein
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$phoneNumber")
             }
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         // WhatsApp Action Button
         btnWhatsapp.setOnClickListener {
-            val whatsappNumber = "919876543210" // Country code (91) ke saath number
+            val whatsappNumber = "919758149149" // Country code (91) ke saath number
             val url = "https://api.whatsapp.com/send?phone=$whatsappNumber&text=Hello,%20mujhe%20repairing%20inquiry%20karni%20hai."
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(url)
