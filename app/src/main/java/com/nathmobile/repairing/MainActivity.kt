@@ -20,9 +20,6 @@ class MainActivity : AppCompatActivity() {
         val btnWhatsapp = findViewById<Button>(R.id.btnWhatsapp)
         val cardShop = findViewById<CardView>(R.id.cardShop)
 
-        val cardDisplay = findViewById<CardView>(R.id.cardDisplay)
-        val cardBattery = findViewById<CardView>(R.id.cardBattery)
-
         // 1. CALL US Button
         btnCall.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL).apply {
@@ -36,16 +33,7 @@ class MainActivity : AppCompatActivity() {
             openWhatsAppWithMessage("Hi, mujhe mobile repair ke baare mein enquiry karni hai.")
         }
 
-        // 3. Service Cards Enquiry
-        cardDisplay.setOnClickListener {
-            openWhatsAppWithMessage("Hi, mujhe Display & Touch Replacement ka price jaan na hai.")
-        }
-
-        cardBattery.setOnClickListener {
-            openWhatsAppWithMessage("Hi, mujhe Battery & Charging Jack repair ka estimate chahiye.")
-        }
-
-        // 4. VISIT OUR SHOP
+        // 3. VISIT OUR SHOP (Google Maps Link)
         cardShop.setOnClickListener {
             val mapUrl = "https://www.google.com/maps/search/?api=1&query=Nath+Mobile+Repairing"
             val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl))
