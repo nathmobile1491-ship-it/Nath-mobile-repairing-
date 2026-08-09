@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 
 class MainActivity : AppCompatActivity() {
 
-    // ⚠️ Yahan "91XXXXXXXXXX" ki jagah apna asli mobile number daalein
+    // ⚠️ Yahan "919758149149" ki jagah apna asli mobile number daalein
     private val shopPhoneNumber = "919758149149" 
 
     override fun onCreate(savedInstanceState: Bundle?) {
