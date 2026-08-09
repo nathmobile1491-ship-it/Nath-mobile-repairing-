@@ -2,6 +2,7 @@ package com.nathmobile.repairing
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -27,7 +28,6 @@ class BookingActivity : AppCompatActivity() {
         val edtProblem = findViewById<EditText>(R.id.edtProblem)
         val edtAddress = findViewById<EditText>(R.id.edtAddress)
         val edtLandmark = findViewById<EditText>(R.id.edtLandmark)
-
         val edtPickupDate = findViewById<EditText>(R.id.edtPickupDate)
         val edtPickupTime = findViewById<EditText>(R.id.edtPickupTime)
 
@@ -35,16 +35,14 @@ class BookingActivity : AppCompatActivity() {
         val btnSubmitBooking = findViewById<Button>(R.id.btnSubmitBooking)
         val checkTerms = findViewById<CheckBox>(R.id.checkTerms)
 
-        // PHOTO BUTTON
         btnAddPhoto.setOnClickListener {
             Toast.makeText(
                 this,
-                "Photo upload feature next step mein add karenge.",
+                "Photo upload next step mein add karenge.",
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        // PICKUP DATE
         edtPickupDate.setOnClickListener {
 
             val calendar = Calendar.getInstance()
@@ -68,7 +66,6 @@ class BookingActivity : AppCompatActivity() {
             ).show()
         }
 
-        // PICKUP TIME
         edtPickupTime.setOnClickListener {
 
             val calendar = Calendar.getInstance()
@@ -91,7 +88,6 @@ class BookingActivity : AppCompatActivity() {
             ).show()
         }
 
-        // SUBMIT BOOKING
         btnSubmitBooking.setOnClickListener {
 
             val name = edtName.text.toString().trim()
@@ -104,76 +100,86 @@ class BookingActivity : AppCompatActivity() {
             val pickupDate = edtPickupDate.text.toString().trim()
             val pickupTime = edtPickupTime.text.toString().trim()
 
-            // NAME
             if (name.isEmpty()) {
                 edtName.error = "Name enter karein"
                 edtName.requestFocus()
                 return@setOnClickListener
             }
 
-            // PHONE
             if (!phone.matches(Regex("^[0-9]{10}$"))) {
                 edtPhone.error = "10 digit mobile number enter karein"
                 edtPhone.requestFocus()
                 return@setOnClickListener
             }
 
-            // BRAND
             if (brand.isEmpty()) {
                 edtBrand.error = "Mobile brand enter karein"
                 edtBrand.requestFocus()
                 return@setOnClickListener
             }
 
-            // MODEL
             if (model.isEmpty()) {
                 edtModel.error = "Mobile model enter karein"
                 edtModel.requestFocus()
                 return@setOnClickListener
             }
 
-            // PROBLEM
             if (problem.isEmpty()) {
                 edtProblem.error = "Repair problem enter karein"
                 edtProblem.requestFocus()
                 return@setOnClickListener
             }
 
-            // ADDRESS
             if (address.isEmpty()) {
                 edtAddress.error = "Pickup address enter karein"
                 edtAddress.requestFocus()
                 return@setOnClickListener
             }
 
-            // DATE
             if (pickupDate.isEmpty()) {
                 edtPickupDate.error = "Pickup date select karein"
                 edtPickupDate.requestFocus()
                 return@setOnClickListener
             }
 
-            // TIME
             if (pickupTime.isEmpty()) {
                 edtPickupTime.error = "Pickup time select karein"
                 edtPickupTime.requestFocus()
                 return@setOnClickListener
             }
 
-            // TERMS
             if (!checkTerms.isChecked) {
                 Toast.makeText(
                     this,
                     "Please confirm the information.",
                     Toast.LENGTH_SHORT
                 ).show()
-
                 return@setOnClickListener
             }
 
-            // BOOKING ID
-            val bookingId = "NMR-" +
-                    (System.currentTimeMillis() % 1000000)
+            // UNIQUE BOOKING ID
+            val bookingId =
+                "NMR-" + (System.currentTimeMillis() % 1000000)
+
+            // SAVE BOOKING LOCALLY
+            val preferences = getSharedPreferences(
+                "repair_data",
+                Context.MODE_PRIVATE
+            )
+
+            preferences.edit()
+                .putString("booking_id", bookingId)
+                .putString("customer_name", name)
+                .putString("customer_phone", phone)
+                .putString("brand", brand)
+                .putString("model", model)
+                .putString("problem", problem)
+                .putString("address", address)
+                .putString("landmark", landmark)
+                .putString("pickup_date", pickupDate)
+                .putString("pickup_time", pickupTime)
+                .putString("status_$bookingId", "Booking Received")
+                .apply()
 
             // WHATSAPP MESSAGE
             val message = """
@@ -200,8 +206,6 @@ class BookingActivity : AppCompatActivity() {
                 ⏰ *Pickup Time:* $pickupTime
                 
                 🚚 *Service:* Pickup & Delivery
-                
-                Please confirm this repair booking.
             """.trimIndent()
 
             val whatsappUrl =
@@ -209,18 +213,12 @@ class BookingActivity : AppCompatActivity() {
 
             try {
 
-                val intent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(whatsappUrl)
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(whatsappUrl)
+                    )
                 )
-
-                startActivity(intent)
-
-                Toast.makeText(
-                    this,
-                    "Booking ID: $bookingId",
-                    Toast.LENGTH_LONG
-                ).show()
 
             } catch (e: Exception) {
 
@@ -230,6 +228,12 @@ class BookingActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+            Toast.makeText(
+                this,
+                "Booking Created!\nBooking ID: $bookingId",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 }
