@@ -64,6 +64,8 @@
             android:textStyle="bold"/>
 
 
+        <!-- BOOK REPAIR -->
+
         <Button
             android:id="@+id/btnBookRepair"
             android:layout_width="match_parent"
@@ -76,6 +78,8 @@
             android:textStyle="bold"/>
 
 
+        <!-- PICKUP DELIVERY -->
+
         <Button
             android:id="@+id/btnPickupDelivery"
             android:layout_width="match_parent"
@@ -87,6 +91,8 @@
             android:textSize="17sp"
             android:textStyle="bold"/>
 
+
+        <!-- TRACK REPAIR -->
 
         <Button
             android:id="@+id/btnTrackRepair"
@@ -133,21 +139,7 @@
         </LinearLayout>
 
 
-        <!-- ADMIN PANEL -->
-
-        <Button
-            android:id="@+id/btnAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#6F42C1"
-            android:text="🔐  ADMIN PANEL"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
-
-
-        <!-- SERVICES -->
+        <!-- REPAIR SERVICES -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -159,6 +151,8 @@
             android:textSize="22sp"
             android:textStyle="bold"/>
 
+
+        <!-- DISPLAY -->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardDisplay"
@@ -179,6 +173,8 @@
         </androidx.cardview.widget.CardView>
 
 
+        <!-- BATTERY -->
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardBattery"
             android:layout_width="match_parent"
@@ -197,6 +193,8 @@
 
         </androidx.cardview.widget.CardView>
 
+
+        <!-- WATER DAMAGE -->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardWater"
@@ -217,6 +215,8 @@
         </androidx.cardview.widget.CardView>
 
 
+        <!-- SOFTWARE -->
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSoftware"
             android:layout_width="match_parent"
@@ -235,6 +235,8 @@
 
         </androidx.cardview.widget.CardView>
 
+
+        <!-- ACCESSORIES -->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAccessories"
@@ -402,7 +404,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="3dp">
 
@@ -440,6 +442,22 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+
+        <!-- ADMIN PANEL -->
+
+        <Button
+            android:id="@+id/btnAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#6F42C1"
+            android:text="🔐  ADMIN PANEL"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
 
     </LinearLayout>
 
