@@ -13,7 +13,7 @@ class AdminActivity : AppCompatActivity() {
 
     private lateinit var statusText: TextView
 
-    private val bookingId = "NMR-950854"
+    private val defaultBookingId = "NMR-950854"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,9 @@ class AdminActivity : AppCompatActivity() {
         val root = LinearLayout(this)
         root.orientation = LinearLayout.VERTICAL
         root.setPadding(16, 16, 16, 30)
-        root.setBackgroundColor(Color.rgb(244, 246, 249))
+        root.setBackgroundColor(
+            Color.rgb(244, 246, 249)
+        )
 
         // HEADER
         val header = TextView(this)
@@ -30,7 +32,9 @@ class AdminActivity : AppCompatActivity() {
         header.setTextColor(Color.WHITE)
         header.gravity = Gravity.CENTER
         header.setPadding(15, 30, 15, 30)
-        header.setBackgroundColor(Color.rgb(103, 58, 183))
+        header.setBackgroundColor(
+            Color.rgb(103, 58, 183)
+        )
 
         root.addView(header)
 
@@ -45,21 +49,10 @@ class AdminActivity : AppCompatActivity() {
 
         // BOOKING DETAILS
         val booking = TextView(this)
-
-        booking.text =
-            "Booking ID: NMR-950854\n\n" +
-            "Customer: Adi\n" +
-            "Phone: 7037746519\n" +
-            "Brand: Oppo\n" +
-            "Model: Ip12 Pro\n" +
-            "Problem: Battery Change\n" +
-            "Address: 2828 Lakhi Bagh\n" +
-            "Landmark: Sham Shan Ghat\n" +
-            "Pickup Date: 13/08/2026\n" +
-            "Pickup Time: 16:41"
-
-        booking.textSize = 17f
-        booking.setTextColor(Color.rgb(50, 50, 50))
+        booking.textSize = 16f
+        booking.setTextColor(
+            Color.rgb(50, 50, 50)
+        )
         booking.setPadding(20, 20, 20, 20)
         booking.setBackgroundColor(Color.WHITE)
 
@@ -73,15 +66,18 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(statusText)
 
-        // LOAD SAVED STATUS
-        showSavedStatus()
+        // LOAD BOOKING
+        loadBooking(booking)
 
         // CONFIRM
         val confirmButton = Button(this)
         confirmButton.text = "✅ CONFIRM BOOKING"
 
         confirmButton.setOnClickListener {
-            saveStatus("Booking Confirmed")
+            saveStatus(
+                getCurrentBookingId(booking),
+                "Booking Confirmed"
+            )
         }
 
         root.addView(confirmButton)
@@ -91,7 +87,10 @@ class AdminActivity : AppCompatActivity() {
         pickupButton.text = "🚚 PICKED UP"
 
         pickupButton.setOnClickListener {
-            saveStatus("Picked Up")
+            saveStatus(
+                getCurrentBookingId(booking),
+                "Picked Up"
+            )
         }
 
         root.addView(pickupButton)
@@ -101,17 +100,23 @@ class AdminActivity : AppCompatActivity() {
         repairButton.text = "🔧 IN REPAIR"
 
         repairButton.setOnClickListener {
-            saveStatus("Repair In Progress")
+            saveStatus(
+                getCurrentBookingId(booking),
+                "Repair In Progress"
+            )
         }
 
         root.addView(repairButton)
 
         // READY
         val readyButton = Button(this)
-        readyButton.text = "✅ READY FOR DELIVERY"
+        readyButton.text = "📦 READY FOR DELIVERY"
 
         readyButton.setOnClickListener {
-            saveStatus("Ready for Delivery")
+            saveStatus(
+                getCurrentBookingId(booking),
+                "Ready for Delivery"
+            )
         }
 
         root.addView(readyButton)
@@ -121,7 +126,10 @@ class AdminActivity : AppCompatActivity() {
         deliveredButton.text = "🏠 DELIVERED"
 
         deliveredButton.setOnClickListener {
-            saveStatus("Delivered")
+            saveStatus(
+                getCurrentBookingId(booking),
+                "Delivered"
+            )
         }
 
         root.addView(deliveredButton)
@@ -131,7 +139,10 @@ class AdminActivity : AppCompatActivity() {
         resetButton.text = "🔄 RESET STATUS"
 
         resetButton.setOnClickListener {
-            saveStatus("Booking Received")
+            saveStatus(
+                getCurrentBookingId(booking),
+                "Booking Received"
+            )
         }
 
         root.addView(resetButton)
@@ -139,7 +150,134 @@ class AdminActivity : AppCompatActivity() {
         setContentView(root)
     }
 
-    private fun saveStatus(status: String) {
+    private fun loadBooking(
+        bookingView: TextView
+    ) {
+
+        val preferences =
+            getSharedPreferences(
+                "repair_data",
+                Context.MODE_PRIVATE
+            )
+
+        val bookingId =
+            preferences.getString(
+                "booking_id",
+                null
+            )
+
+        if (bookingId == null) {
+
+            bookingView.text =
+                "📭 No new booking found.\n\n" +
+                "Customer booking karega to yahan details dikhegi."
+
+            showStatus(
+                defaultBookingId,
+                "Booking Received"
+            )
+
+            return
+        }
+
+        val name =
+            preferences.getString(
+                "customer_name",
+                ""
+            )
+
+        val phone =
+            preferences.getString(
+                "customer_phone",
+                ""
+            )
+
+        val brand =
+            preferences.getString(
+                "brand",
+                ""
+            )
+
+        val model =
+            preferences.getString(
+                "model",
+                ""
+            )
+
+        val problem =
+            preferences.getString(
+                "problem",
+                ""
+            )
+
+        val address =
+            preferences.getString(
+                "address",
+                ""
+            )
+
+        val landmark =
+            preferences.getString(
+                "landmark",
+                ""
+            )
+
+        val pickupDate =
+            preferences.getString(
+                "pickup_date",
+                ""
+            )
+
+        val pickupTime =
+            preferences.getString(
+                "pickup_time",
+                ""
+            )
+
+        bookingView.text =
+            "Booking ID: $bookingId\n\n" +
+            "Customer: $name\n" +
+            "Phone: $phone\n\n" +
+            "Brand: $brand\n" +
+            "Model: $model\n\n" +
+            "Problem:\n$problem\n\n" +
+            "Address:\n$address\n\n" +
+            "Landmark: $landmark\n\n" +
+            "Pickup Date: $pickupDate\n" +
+            "Pickup Time: $pickupTime"
+
+        val savedStatus =
+            preferences.getString(
+                "status_$bookingId",
+                "Booking Received"
+            )
+
+        showStatus(
+            bookingId,
+            savedStatus ?: "Booking Received"
+        )
+    }
+
+    private fun getCurrentBookingId(
+        bookingView: TextView
+    ): String {
+
+        val preferences =
+            getSharedPreferences(
+                "repair_data",
+                Context.MODE_PRIVATE
+            )
+
+        return preferences.getString(
+            "booking_id",
+            defaultBookingId
+        ) ?: defaultBookingId
+    }
+
+    private fun saveStatus(
+        bookingId: String,
+        status: String
+    ) {
 
         val preferences =
             getSharedPreferences(
@@ -154,27 +292,16 @@ class AdminActivity : AppCompatActivity() {
             )
             .apply()
 
-        showStatus(status)
+        showStatus(
+            bookingId,
+            status
+        )
     }
 
-    private fun showSavedStatus() {
-
-        val preferences =
-            getSharedPreferences(
-                "repair_data",
-                Context.MODE_PRIVATE
-            )
-
-        val savedStatus =
-            preferences.getString(
-                "status_$bookingId",
-                "Booking Received"
-            )
-
-        showStatus(savedStatus ?: "Booking Received")
-    }
-
-    private fun showStatus(status: String) {
+    private fun showStatus(
+        bookingId: String,
+        status: String
+    ) {
 
         val icon = when (status) {
 
@@ -184,7 +311,7 @@ class AdminActivity : AppCompatActivity() {
 
             "Repair In Progress" -> "🔧"
 
-            "Ready for Delivery" -> "✅"
+            "Ready for Delivery" -> "📦"
 
             "Delivered" -> "🏠"
 
@@ -192,9 +319,11 @@ class AdminActivity : AppCompatActivity() {
         }
 
         statusText.text =
-            "CURRENT STATUS\n\n$icon $status"
+            "CURRENT STATUS\n\n" +
+            "$icon $status"
 
         statusText.setTextColor(
+
             when (status) {
 
                 "Booking Confirmed" ->
