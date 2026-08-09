@@ -1,6 +1,4 @@
-
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,7 +12,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- HEADER -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,24 +28,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🔧 Book a Repair"
+                    android:text="Book a Repair"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Pickup &amp; Delivery Available"
+                    android:text="Pickup and Delivery Available"
                     android:textColor="#E3F2FD"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
+
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
-
-        <!-- CUSTOMER DETAILS -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,31 +51,26 @@
             android:text="Customer Details"
             android:textColor="#212121"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
             android:hint="Enter your name"
             android:inputType="textPersonName"
-            android:padding="12dp"/>
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/edtPhone"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
             android:hint="Mobile number"
             android:inputType="phone"
             android:maxLength="10"
-            android:padding="12dp"/>
-
-
-        <!-- MOBILE DETAILS -->
+            android:padding="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,30 +79,25 @@
             android:text="Mobile Details"
             android:textColor="#212121"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtBrand"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
-            android:hint="Mobile brand (Samsung, iPhone, Vivo...)"
+            android:hint="Mobile brand"
             android:inputType="textCapWords"
-            android:padding="12dp"/>
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/edtModel"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
             android:hint="Mobile model"
             android:inputType="textCapWords"
-            android:padding="12dp"/>
-
-
-        <!-- REPAIR PROBLEM -->
+            android:padding="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,21 +106,17 @@
             android:text="Repair Problem"
             android:textColor="#212121"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtProblem"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
             android:gravity="top"
             android:hint="Describe your mobile problem"
             android:inputType="textMultiLine"
-            android:padding="12dp"/>
-
-
-        <!-- PHOTO -->
+            android:padding="12dp" />
 
         <Button
             android:id="@+id/btnAddPhoto"
@@ -144,12 +124,9 @@
             android:layout_height="55dp"
             android:layout_marginTop="12dp"
             android:backgroundTint="#673AB7"
-            android:text="📸  ADD MOBILE PHOTO"
+            android:text="ADD MOBILE PHOTO"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"/>
-
-
-        <!-- PICKUP -->
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -158,56 +135,46 @@
             android:text="Pickup Details"
             android:textColor="#212121"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtAddress"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
             android:gravity="top"
             android:hint="Enter complete pickup address"
             android:inputType="textMultiLine"
-            android:padding="12dp"/>
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/edtLandmark"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
             android:hint="Landmark (optional)"
             android:inputType="text"
-            android:padding="12dp"/>
-
-
-        <!-- DATE & TIME -->
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/edtPickupDate"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="12dp"
-            android:background="@android:drawable/edit_text"
             android:clickable="true"
             android:focusable="false"
-            android:hint="📅 Select pickup date"
-            android:padding="12dp"/>
+            android:hint="Select pickup date"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/edtPickupTime"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/edit_text"
             android:clickable="true"
             android:focusable="false"
-            android:hint="⏰ Select pickup time"
-            android:padding="12dp"/>
-
-
-        <!-- PICKUP OPTION -->
+            android:hint="Select pickup time"
+            android:padding="12dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -224,10 +191,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🚚 Service Required"
+                    android:text="Service Required"
                     android:textColor="#1976D2"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <RadioGroup
                     android:id="@+id/serviceTypeGroup"
@@ -240,31 +207,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="Pickup &amp; Delivery"/>
+                        android:text="Pickup and Delivery" />
 
                     <RadioButton
                         android:id="@+id/radioShopVisit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="I will visit the shop"/>
+                        android:text="I will visit the shop" />
 
                 </RadioGroup>
 
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
-
-        <!-- TERMS -->
 
         <CheckBox
             android:id="@+id/checkTerms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="I confirm that the information provided is correct."/>
-
-        <!-- SUBMIT -->
+            android:text="I confirm that the information provided is correct." />
 
         <Button
             android:id="@+id/btnSubmitBooking"
@@ -273,10 +234,10 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="25dp"
             android:backgroundTint="#2E7D32"
-            android:text="✅  SUBMIT REPAIR BOOKING"
+            android:text="SUBMIT REPAIR BOOKING"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
