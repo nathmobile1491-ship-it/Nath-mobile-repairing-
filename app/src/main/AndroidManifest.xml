@@ -2,24 +2,30 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Location -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:label="Nath Mobile Repairing"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <!-- Splash Screen -->
         <activity
-            android:name=".SplashActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:name=".AdminActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TrackRepairActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PickupDeliveryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".BookingActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,26 +33,6 @@
             </intent-filter>
 
         </activity>
-
-        <!-- Main Dashboard -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-
-        <!-- Book A Repair -->
-        <activity
-            android:name=".BookingActivity"
-            android:exported="false" />
-
-        <!-- Pickup & Delivery -->
-        <activity
-            android:name=".PickupDeliveryActivity"
-            android:exported="false" />
-
-        <!-- Track My Repair -->
-        <activity
-            android:name=".TrackRepairActivity"
-            android:exported="false" />
 
     </application>
 
