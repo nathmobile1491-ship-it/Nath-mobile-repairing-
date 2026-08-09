@@ -1,399 +1,149 @@
-<?xml version="1.0" encoding="utf-8"?>
+package com.nathmobile.repairing
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F4F6F9">
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+class MainActivity : AppCompatActivity() {
 
-        <!-- HEADER -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="#1976D2"
-            app:cardCornerRadius="12dp">
+    private val shopPhoneNumber = "919758149149"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="24dp">
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nath Mobile Repairing &amp; Accessories"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+        // MAIN BUTTONS
+        val btnBookRepair = findViewById<Button>(R.id.btnBookRepair)
+        val btnPickupDelivery = findViewById<Button>(R.id.btnPickupDelivery)
+        val btnTrackRepair = findViewById<Button>(R.id.btnTrackRepair)
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Fast &amp; Reliable Repair Services"
-                    android:textColor="#E3F2FD"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        // CALL & WHATSAPP
+        val btnCall = findViewById<Button>(R.id.btnCall)
+        val btnWhatsapp = findViewById<Button>(R.id.btnWhatsapp)
+
+        // SERVICE CARDS
+        val cardDisplay = findViewById<CardView>(R.id.cardDisplay)
+        val cardBattery = findViewById<CardView>(R.id.cardBattery)
+        val cardWater = findViewById<CardView>(R.id.cardWater)
+        val cardSoftware = findViewById<CardView>(R.id.cardSoftware)
+        val cardAccessories = findViewById<CardView>(R.id.cardAccessories)
+
+        // SHOP
+        val cardShop = findViewById<CardView>(R.id.cardShop)
 
 
-        <!-- MAIN ACTIONS -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="What do you need?"
-            android:textColor="#212121"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/btnBookRepair"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#1976D2"
-            android:text="🔧  BOOK A REPAIR"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/btnPickupDelivery"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#FF9800"
-            android:text="🚚  PICKUP &amp; DELIVERY"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/btnTrackRepair"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#673AB7"
-            android:text="🔎  TRACK MY REPAIR"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
+        // 1. BOOK A REPAIR
+        btnBookRepair.setOnClickListener {
+            startActivity(
+                Intent(this, BookingActivity::class.java)
+            )
+        }
 
 
-        <!-- CALL & WHATSAPP -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnCall"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="5dp"
-                android:backgroundTint="#2E7D32"
-                android:text="📞 CALL"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/btnWhatsapp"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:layout_marginStart="5dp"
-                android:backgroundTint="#25D366"
-                android:text="💬 WHATSAPP"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"/>
-        </LinearLayout>
+        // 2. PICKUP & DELIVERY
+        btnPickupDelivery.setOnClickListener {
+            startActivity(
+                Intent(this, PickupDeliveryActivity::class.java)
+            )
+        }
 
 
-        <!-- SERVICES -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="10dp"
-            android:text="Our Repair Services"
-            android:textColor="#212121"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardDisplay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="📱  Display &amp; Touch Replacement"
-                android:textColor="#333333"
-                android:textSize="16sp"/>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardBattery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="🔋  Battery &amp; Charging Jack Repair"
-                android:textColor="#333333"
-                android:textSize="16sp"/>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardWater"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="💧  Water Damage &amp; Motherboard Repair"
-                android:textColor="#333333"
-                android:textSize="16sp"/>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardSoftware"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="🔐  Software Unlocking &amp; Flashing"
-                android:textColor="#333333"
-                android:textSize="16sp"/>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAccessories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="🎧  Mobile Accessories, Covers &amp; Glass"
-                android:textColor="#333333"
-                android:textSize="16sp"/>
-        </androidx.cardview.widget.CardView>
+        // 3. TRACK MY REPAIR
+        btnTrackRepair.setOnClickListener {
+            startActivity(
+                Intent(this, TrackRepairActivity::class.java)
+            )
+        }
 
 
-        <!-- BRANDS -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="📱 We Repair All Brands"
-            android:textColor="#212121"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Samsung     •     iPhone"
-                    android:textColor="#333333"
-                    android:textSize="17sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Vivo          •     Oppo"
-                    android:textColor="#333333"
-                    android:textSize="17sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Xiaomi        •     OnePlus"
-                    android:textColor="#333333"
-                    android:textSize="17sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Realme       •     Redmi"
-                    android:textColor="#333333"
-                    android:textSize="17sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Motorola     •     Nokia"
-                    android:textColor="#333333"
-                    android:textSize="17sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        // 4. CALL
+        btnCall.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_DIAL,
+                Uri.parse("tel:$shopPhoneNumber")
+            )
+            startActivity(intent)
+        }
 
 
-        <!-- WHY CHOOSE US -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="Why Choose Us?"
-            android:textColor="#212121"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="⚡&#10;30-Min&#10;Repair"
-                    android:textColor="#222222"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="🛡️&#10;30 Days&#10;Warranty"
-                    android:textColor="#222222"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="🔒&#10;Data Safe"
-                    android:textColor="#222222"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        // 5. WHATSAPP
+        btnWhatsapp.setOnClickListener {
+            openWhatsApp(
+                "Hi Nath Mobile Repairing, mujhe mobile repair ke baare mein enquiry karni hai."
+            )
+        }
 
 
-        <!-- SHOP -->
+        // 6. DISPLAY
+        cardDisplay.setOnClickListener {
+            openWhatsApp(
+                "Hi, mujhe Display & Touch Replacement ka price jaan na hai."
+            )
+        }
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardShop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+        // 7. BATTERY
+        cardBattery.setOnClickListener {
+            openWhatsApp(
+                "Hi, mujhe Battery & Charging Jack repair ka estimate chahiye."
+            )
+        }
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📍 Visit Our Shop"
-                    android:textColor="#1976D2"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Open All Days: 9:00 AM - 9:00 PM"
-                    android:textColor="#666666"
-                    android:textSize="14sp"/>
+        // 8. WATER DAMAGE
+        cardWater.setOnClickListener {
+            openWhatsApp(
+                "Hi, mera phone paani mein gir gaya hai. Water Damage / Motherboard repair karwana hai."
+            )
+        }
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Pickup &amp; Delivery Available"
-                    android:textColor="#1976D2"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        // 9. SOFTWARE
+        cardSoftware.setOnClickListener {
+            openWhatsApp(
+                "Hi, mujhe Software Unlocking / Flashing ke baare mein puchna hai."
+            )
+        }
 
-    </LinearLayout>
 
-</ScrollView>
+        // 10. ACCESSORIES
+        cardAccessories.setOnClickListener {
+            openWhatsApp(
+                "Hi, mujhe Mobile Accessories / Cover / Glass chahiye."
+            )
+        }
+
+
+        // 11. VISIT SHOP
+        cardShop.setOnClickListener {
+
+            val mapUrl =
+                "https://www.google.com/maps/search/?api=1&query=Nath+Mobile+Repairing"
+
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(mapUrl)
+            )
+
+            startActivity(intent)
+        }
+    }
+
+
+    // WHATSAPP FUNCTION
+    private fun openWhatsApp(message: String) {
+
+        val url =
+            "https://wa.me/$shopPhoneNumber?text=${Uri.encode(message)}"
+
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(url)
+        )
+
+        startActivity(intent)
+    }
+}
