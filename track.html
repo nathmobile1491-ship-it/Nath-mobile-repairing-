@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Track My Repair - Nath Mobile</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  padding-bottom: 30px;
+}
+
+.navbar {
+  background: #222;
+  color: white;
+  padding: 18px 15px;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.header {
+  background: #00897b;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+.header h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.header p {
+  font-size: 16px;
+}
+
+.box {
+  background: white;
+  margin: 20px 15px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.15);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 7px;
+  background: #00897b;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.result {
+  display: none;
+}
+
+.booking-id {
+  color: #1976d2;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.row {
+  padding: 8px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.status {
+  background: #fff3cd;
+  padding: 14px;
+  border-radius: 7px;
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error {
+  display: none;
+  color: #d32f2f;
+  margin-top: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.back {
+  display: block;
+  margin: 15px;
+  padding: 14px;
+  background: #1e88e5;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  📱 Nath Mobile Repairing
+</div>
+
+<div class="header">
+  <h1>🔍 Track My Repair</h1>
+  <p>Enter your booking number</p>
+</div>
+
+<div class="box">
+
+  <label>Booking Number</label>
+
+  <input
+    type="text"
+    id="bookingId"
+    placeholder="Example: NMR-950854"
+  >
+
+  <button onclick="trackRepair()">
+    🔍 TRACK REPAIR
+  </button>
+
+  <div class="error" id="error">
+    ❌ Booking not found
+  </div>
+
+</div>
+
+
+<div class="box result" id="result">
+
+  <div class="booking-id" id="rBooking"></div>
+
+  <div class="row">
+    👤 <b>Customer:</b>
+    <span id="rCustomer"></span>
+  </div>
+
+  <div class="row">
+    📞 <b>Phone:</b>
+    <span id="rPhone"></span>
+  </div>
+
+  <div class="row">
+    📱 <b>Brand:</b>
+    <span id="rBrand"></span>
+  </div>
+
+  <div class="row">
+    📱 <b>Model:</b>
+    <span id="rModel"></span>
+  </div>
+
+  <div class="row">
+    🔧 <b>Problem:</b>
+    <span id="rProblem"></span>
+  </div>
+
+  <div class="row">
+    📅 <b>Pickup:</b>
+    <span id="rPickup"></span>
+  </div>
+
+  <div class="status" id="rStatus"></div>
+
+</div>
+
+
+<a href="index.html" class="back">
+  🏠 BACK TO HOME
+</a>
+
+
+<footer>
+  © 2026 Nath Mobile Repairing
+</footer>
+
+
+<script>
+
+const bookings = {
+
+  "NMR-950854": {
+    customer: "adi",
+    phone: "7037746519",
+    brand: "Oppo",
+    model: "Ip12 Pro",
+    problem: "Battery change",
+    pickup: "13/08/2026",
+    status: "Booking Received"
+  }
+
+};
+
+
+function trackRepair() {
+
+  let id = document
+    .getElementById("bookingId")
+    .value
+    .trim()
+    .toUpperCase();
+
+  let result = document.getElementById("result");
+  let error = document.getElementById("error");
+
+  if (bookings[id]) {
+
+    let data = bookings[id];
+
+    document.getElementById("rBooking").innerText = id;
+    document.getElementById("rCustomer").innerText = " " + data.customer;
+    document.getElementById("rPhone").innerText = " " + data.phone;
+    document.getElementById("rBrand").innerText = " " + data.brand;
+    document.getElementById("rModel").innerText = " " + data.model;
+    document.getElementById("rProblem").innerText = " " + data.problem;
+    document.getElementById("rPickup").innerText = " " + data.pickup;
+    document.getElementById("rStatus").innerText =
+      "📦 Status: " + data.status;
+
+    result.style.display = "block";
+    error.style.display = "none";
+
+  } else {
+
+    result.style.display = "none";
+    error.style.display = "block";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
