@@ -13,26 +13,21 @@ import androidx.appcompat.app.AppCompatActivity
 class TrackRepairActivity : AppCompatActivity() {
 
     private lateinit var statusText: TextView
+    private lateinit var progressText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val root = LinearLayout(this)
-
         root.orientation = LinearLayout.VERTICAL
-        root.setPadding(20, 30, 20, 30)
-        root.setBackgroundColor(
-            Color.rgb(244, 246, 249)
-        )
+        root.setPadding(20, 25, 20, 30)
+        root.setBackgroundColor(Color.rgb(244, 246, 249))
 
         // HEADER
         val header = TextView(this)
-
         header.text = "🔎 Track My Repair"
         header.textSize = 28f
-        header.setTextColor(
-            Color.rgb(30, 136, 229)
-        )
+        header.setTextColor(Color.rgb(30, 136, 229))
         header.gravity = Gravity.CENTER
         header.setPadding(10, 20, 10, 20)
 
@@ -40,7 +35,6 @@ class TrackRepairActivity : AppCompatActivity() {
 
         // DESCRIPTION
         val description = TextView(this)
-
         description.text =
             "Enter your Booking ID to check your repair status."
 
@@ -53,7 +47,6 @@ class TrackRepairActivity : AppCompatActivity() {
 
         // BOOKING ID
         val bookingInput = EditText(this)
-
         bookingInput.hint = "Enter Booking ID"
         bookingInput.textSize = 18f
         bookingInput.setSingleLine(true)
@@ -62,40 +55,48 @@ class TrackRepairActivity : AppCompatActivity() {
 
         // CHECK BUTTON
         val checkButton = Button(this)
-
-        checkButton.text =
-            "🔎 CHECK REPAIR STATUS"
+        checkButton.text = "🔎 CHECK REPAIR STATUS"
 
         root.addView(checkButton)
 
-        // RESULT
+        // STATUS
         statusText = TextView(this)
-
         statusText.textSize = 19f
         statusText.gravity = Gravity.CENTER
-        statusText.setPadding(
-            15,
-            30,
-            15,
-            30
-        )
+        statusText.setPadding(15, 25, 15, 20)
 
         root.addView(statusText)
 
+        // PROGRESS TITLE
+        val progressTitle = TextView(this)
+        progressTitle.text = "Repair Progress"
+        progressTitle.textSize = 21f
+        progressTitle.setTextColor(Color.DKGRAY)
+        progressTitle.setGravity(Gravity.CENTER)
+        progressTitle.setPadding(10, 15, 10, 10)
+
+        root.addView(progressTitle)
+
+        // PROGRESS STEPS
+        progressText = TextView(this)
+        progressText.textSize = 17f
+        progressText.setTextColor(Color.DKGRAY)
+        progressText.setPadding(15, 15, 15, 15)
+        progressText.setBackgroundColor(Color.WHITE)
+
+        root.addView(progressText)
+
         // WHATSAPP
         val whatsappButton = Button(this)
-
-        whatsappButton.text =
-            "💬 ASK ON WHATSAPP"
+        whatsappButton.text = "💬 ASK ON WHATSAPP"
 
         root.addView(whatsappButton)
 
+        // CHECK STATUS
         checkButton.setOnClickListener {
 
             val bookingId =
-                bookingInput.text
-                    .toString()
-                    .trim()
+                bookingInput.text.toString().trim()
 
             if (bookingId.isEmpty()) {
 
@@ -105,6 +106,8 @@ class TrackRepairActivity : AppCompatActivity() {
                 statusText.setTextColor(
                     Color.rgb(198, 40, 40)
                 )
+
+                progressText.text = ""
 
                 return@setOnClickListener
             }
@@ -127,9 +130,12 @@ class TrackRepairActivity : AppCompatActivity() {
                 statusText.setTextColor(
                     Color.rgb(198, 40, 40)
                 )
+
+                progressText.text = ""
             }
         }
 
+        // WHATSAPP
         whatsappButton.setOnClickListener {
 
             val url =
@@ -159,7 +165,7 @@ class TrackRepairActivity : AppCompatActivity() {
             preferences.getString(
                 "status_NMR-950854",
                 "Booking Received"
-            )
+            ) ?: "Booking Received"
 
         val icon = when (status) {
 
@@ -169,7 +175,7 @@ class TrackRepairActivity : AppCompatActivity() {
 
             "Repair In Progress" -> "🔧"
 
-            "Ready for Delivery" -> "✅"
+            "Ready for Delivery" -> "📦"
 
             "Delivered" -> "🏠"
 
@@ -178,11 +184,9 @@ class TrackRepairActivity : AppCompatActivity() {
 
         statusText.text =
             "Booking ID: NMR-950854\n\n" +
-            "Status: $icon $status\n\n" +
-            "Our team will contact you shortly."
+            "Current Status: $icon $status"
 
         statusText.setTextColor(
-
             when (status) {
 
                 "Booking Confirmed" ->
@@ -204,5 +208,58 @@ class TrackRepairActivity : AppCompatActivity() {
                     Color.rgb(245, 124, 0)
             }
         )
+
+        updateProgress(status)
+    }
+
+    private fun updateProgress(status: String) {
+
+        val steps = arrayOf(
+            "Booking Received",
+            "Booking Confirmed",
+            "Picked Up",
+            "Repair In Progress",
+            "Ready for Delivery",
+            "Delivered"
+        )
+
+        var currentStep = 0
+
+        when (status) {
+
+            "Booking Confirmed" ->
+                currentStep = 1
+
+            "Picked Up" ->
+                currentStep = 2
+
+            "Repair In Progress" ->
+                currentStep = 3
+
+            "Ready for Delivery" ->
+                currentStep = 4
+
+            "Delivered" ->
+                currentStep = 5
+        }
+
+        val builder = StringBuilder()
+
+        for (i in steps.indices) {
+
+            if (i <= currentStep) {
+                builder.append("🟢 ")
+            } else {
+                builder.append("⚪ ")
+            }
+
+            builder.append(steps[i])
+
+            if (i < steps.lastIndex) {
+                builder.append("\n     ↓\n")
+            }
+        }
+
+        progressText.text = builder.toString()
     }
 }
