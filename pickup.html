@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pickup & Delivery - Nath Mobile</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  padding-bottom: 30px;
+}
+
+.navbar {
+  background: #222;
+  color: white;
+  padding: 18px 15px;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.header {
+  background: #ff9800;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+.header h1 {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.header p {
+  font-size: 16px;
+}
+
+.box {
+  background: white;
+  margin: 18px 15px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.15);
+}
+
+.title {
+  font-size: 21px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 7px;
+  margin-top: 12px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 7px;
+  background: #ff9800;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.whatsapp {
+  background: #25d366;
+}
+
+.info {
+  background: #fff8e1;
+  border-left: 5px solid #ff9800;
+  padding: 14px;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.success {
+  display: none;
+  background: #e8f5e9;
+  border-left: 5px solid #2e7d32;
+  padding: 15px;
+  margin-top: 15px;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.back {
+  display: block;
+  margin: 15px;
+  padding: 14px;
+  background: #1e88e5;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  📱 Nath Mobile Repairing
+</div>
+
+<div class="header">
+  <h1>🚚 Pickup & Delivery</h1>
+  <p>Get your mobile picked up from your home</p>
+</div>
+
+<div class="box">
+
+  <div class="title">
+    📋 Pickup Request
+  </div>
+
+  <label>Customer Name</label>
+  <input
+    type="text"
+    id="name"
+    placeholder="Enter your name"
+  >
+
+  <label>Mobile Number</label>
+  <input
+    type="tel"
+    id="phone"
+    maxlength="10"
+    placeholder="10 digit mobile number"
+  >
+
+  <label>Mobile Brand</label>
+  <input
+    type="text"
+    id="brand"
+    placeholder="Samsung / iPhone / Oppo etc."
+  >
+
+  <label>Mobile Model</label>
+  <input
+    type="text"
+    id="model"
+    placeholder="Enter mobile model"
+  >
+
+  <label>Repair Problem</label>
+  <textarea
+    id="problem"
+    placeholder="Tell us about the problem"
+  ></textarea>
+
+  <label>Pickup Address</label>
+  <textarea
+    id="address"
+    placeholder="Enter complete pickup address"
+  ></textarea>
+
+  <label>Landmark</label>
+  <input
+    type="text"
+    id="landmark"
+    placeholder="Nearby landmark"
+  >
+
+  <label>Pickup Date</label>
+  <input
+    type="date"
+    id="date"
+  >
+
+  <label>Pickup Time</label>
+  <select id="time">
+
+    <option value="">
+      Select pickup time
+    </option>
+
+    <option>09:00 AM - 10:00 AM</option>
+    <option>10:00 AM - 11:00 AM</option>
+    <option>11:00 AM - 12:00 PM</option>
+    <option>12:00 PM - 01:00 PM</option>
+    <option>01:00 PM - 02:00 PM</option>
+    <option>02:00 PM - 03:00 PM</option>
+    <option>03:00 PM - 04:00 PM</option>
+    <option>04:00 PM - 05:00 PM</option>
+    <option>05:00 PM - 06:00 PM</option>
+    <option>06:00 PM - 07:00 PM</option>
+    <option>07:00 PM - 08:00 PM</option>
+    <option>08:00 PM - 09:00 PM</option>
+
+  </select>
+
+  <button onclick="submitPickup()">
+    🚚 REQUEST PICKUP
+  </button>
+
+  <div class="success" id="success">
+    ✅ Pickup request ready!<br><br>
+    Booking ID: <span id="bookingId"></span>
+  </div>
+
+  <div class="info">
+    📌 Pickup & Delivery service available.<br><br>
+    Our team will contact you to confirm the pickup.
+  </div>
+
+</div>
+
+
+<div class="box">
+
+  <div class="title">
+    💬 Need Help?
+  </div>
+
+  <button
+    class="whatsapp"
+    onclick="openWhatsApp()">
+    💬 CONTACT ON WHATSAPP
+  </button>
+
+</div>
+
+
+<a href="index.html" class="back">
+  🏠 BACK TO HOME
+</a>
+
+
+<footer>
+  © 2026 Nath Mobile Repairing
+</footer>
+
+
+<script>
+
+function submitPickup() {
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const brand =
+    document.getElementById("brand").value.trim();
+
+  const model =
+    document.getElementById("model").value.trim();
+
+  const problem =
+    document.getElementById("problem").value.trim();
+
+  const address =
+    document.getElementById("address").value.trim();
+
+  const landmark =
+    document.getElementById("landmark").value.trim();
+
+  const date =
+    document.getElementById("date").value;
+
+  const time =
+    document.getElementById("time").value;
+
+
+  if (!name) {
+    alert("Please enter your name.");
+    return;
+  }
+
+  if (!/^[0-9]{10}$/.test(phone)) {
+    alert("Please enter a valid 10 digit mobile number.");
+    return;
+  }
+
+  if (!brand) {
+    alert("Please enter mobile brand.");
+    return;
+  }
+
+  if (!model) {
+    alert("Please enter mobile model.");
+    return;
+  }
+
+  if (!problem) {
+    alert("Please enter repair problem.");
+    return;
+  }
+
+  if (!address) {
+    alert("Please enter pickup address.");
+    return;
+  }
+
+  if (!date) {
+    alert("Please select pickup date.");
+    return;
+  }
+
+  if (!time) {
+    alert("Please select pickup time.");
+    return;
+  }
+
+
+  const bookingId =
+    "NMR-" +
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    );
+
+
+  document.getElementById("bookingId").innerText =
+    bookingId;
+
+  document.getElementById("success").style.display =
+    "block";
+
+
+  const message =
+
+    "🚚 *PICKUP & DELIVERY REQUEST*" +
+    "\n\n" +
+
+    "*Booking ID:* " +
+    bookingId +
+    "\n\n" +
+
+    "👤 *Customer:* " +
+    name +
+    "\n" +
+
+    "📞 *Phone:* " +
+    phone +
+    "\n\n" +
+
+    "📱 *Brand:* " +
+    brand +
+    "\n" +
+
+    "📱 *Model:* " +
+    model +
+    "\n\n" +
+
+    "🔧 *Problem:*" +
+    "\n" +
+    problem +
+    "\n\n" +
+
+    "📍 *Address:*" +
+    "\n" +
+    address +
+    "\n\n" +
+
+    "🏠 *Landmark:* " +
+    landmark +
+    "\n\n" +
+
+    "📅 *Pickup Date:* " +
+    date +
+    "\n" +
+
+    "⏰ *Pickup Time:* " +
+    time;
+
+
+  const whatsappUrl =
+    "https://wa.me/919758149149?text=" +
+    encodeURIComponent(message);
+
+
+  window.open(
+    whatsappUrl,
+    "_blank"
+  );
+}
+
+
+function openWhatsApp() {
+
+  const url =
+    "https://wa.me/919758149149";
+
+  window.open(
+    url,
+    "_blank"
+  );
+}
+
+</script>
+
+</body>
+</html>
