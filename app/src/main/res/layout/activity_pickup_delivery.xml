@@ -1,1 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
 
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F6F9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚚 Pickup &amp; Delivery"
+            android:textColor="#1976D2"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ghar se mobile pickup karwayein aur repair ke baad delivery paayein."
+            android:textColor="#555555"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:paddingBottom="18dp"/>
+
+        <EditText
+            android:id="@+id/edtPickupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Name"
+            android:inputType="textPersonName"
+            android:padding="14dp"/>
+
+        <EditText
+            android:id="@+id/edtPickupPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Number"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:padding="14dp"/>
+
+        <EditText
+            android:id="@+id/edtPickupAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pickup Address"
+            android:inputType="textPostalAddress"
+            android:minLines="2"
+            android:gravity="top"
+            android:padding="14dp"/>
+
+        <EditText
+            android:id="@+id/edtPickupLandmark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Landmark (Optional)"
+            android:inputType="text"
+            android:padding="14dp"/>
+
+        <EditText
+            android:id="@+id/edtPickupDevice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile / Device Model"
+            android:inputType="text"
+            android:padding="14dp"/>
+
+        <EditText
+            android:id="@+id/edtPickupProblem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repair Problem"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
+            android:padding="14dp"/>
+
+        <Button
+            android:id="@+id/btnPickupSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:backgroundTint="#FF9800"
+            android:text="🚚 REQUEST PICKUP"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
+</ScrollView>
