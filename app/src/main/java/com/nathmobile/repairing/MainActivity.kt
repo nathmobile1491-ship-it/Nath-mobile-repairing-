@@ -106,12 +106,21 @@ class MainActivity : AppCompatActivity() {
             val mapUrl =
                 "https://www.google.com/maps/search/?api=1&query=Nath+Mobile+Repairing"
 
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(mapUrl)
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(mapUrl)
+                )
             )
+        }
 
-            startActivity(intent)
+        // ADMIN PANEL
+        val btnAdmin = findViewById<Button>(R.id.btnAdmin)
+
+        btnAdmin.setOnClickListener {
+            startActivity(
+                Intent(this, AdminActivity::class.java)
+            )
         }
     }
 
@@ -120,11 +129,11 @@ class MainActivity : AppCompatActivity() {
         val url =
             "https://wa.me/$shopPhoneNumber?text=${Uri.encode(message)}"
 
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse(url)
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(url)
+            )
         )
-
-        startActivity(intent)
     }
 }
