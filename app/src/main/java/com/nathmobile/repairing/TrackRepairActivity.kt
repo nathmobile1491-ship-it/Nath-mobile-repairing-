@@ -21,13 +21,17 @@ class TrackRepairActivity : AppCompatActivity() {
         val root = LinearLayout(this)
         root.orientation = LinearLayout.VERTICAL
         root.setPadding(20, 25, 20, 30)
-        root.setBackgroundColor(Color.rgb(244, 246, 249))
+        root.setBackgroundColor(
+            Color.rgb(244, 246, 249)
+        )
 
         // HEADER
         val header = TextView(this)
         header.text = "🔎 Track My Repair"
         header.textSize = 28f
-        header.setTextColor(Color.rgb(30, 136, 229))
+        header.setTextColor(
+            Color.rgb(30, 136, 229)
+        )
         header.gravity = Gravity.CENTER
         header.setPadding(10, 20, 10, 20)
 
@@ -72,12 +76,12 @@ class TrackRepairActivity : AppCompatActivity() {
         progressTitle.text = "Repair Progress"
         progressTitle.textSize = 21f
         progressTitle.setTextColor(Color.DKGRAY)
-        progressTitle.setGravity(Gravity.CENTER)
+        progressTitle.gravity = Gravity.CENTER
         progressTitle.setPadding(10, 15, 10, 10)
 
         root.addView(progressTitle)
 
-        // PROGRESS STEPS
+        // PROGRESS
         progressText = TextView(this)
         progressText.textSize = 17f
         progressText.setTextColor(Color.DKGRAY)
@@ -96,7 +100,9 @@ class TrackRepairActivity : AppCompatActivity() {
         checkButton.setOnClickListener {
 
             val bookingId =
-                bookingInput.text.toString().trim()
+                bookingInput.text
+                    .toString()
+                    .trim()
 
             if (bookingId.isEmpty()) {
 
@@ -112,27 +118,7 @@ class TrackRepairActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (
-                bookingId.equals(
-                    "NMR-950854",
-                    ignoreCase = true
-                )
-            ) {
-
-                showBookingStatus()
-
-            } else {
-
-                statusText.text =
-                    "❌ Booking ID not found\n\n" +
-                    "Please check your Booking ID."
-
-                statusText.setTextColor(
-                    Color.rgb(198, 40, 40)
-                )
-
-                progressText.text = ""
-            }
+            checkBooking(bookingId)
         }
 
         // WHATSAPP
@@ -153,7 +139,68 @@ class TrackRepairActivity : AppCompatActivity() {
         setContentView(root)
     }
 
-    private fun showBookingStatus() {
+    private fun checkBooking(
+        bookingId: String
+    ) {
+
+        val preferences =
+            getSharedPreferences(
+                "repair_data",
+                Context.MODE_PRIVATE
+            )
+
+        val savedBookingId =
+            preferences.getString(
+                "booking_id",
+                null
+            )
+
+        // CHECK NEW BOOKING
+        if (
+            savedBookingId != null &&
+            bookingId.equals(
+                savedBookingId,
+                ignoreCase = true
+            )
+        ) {
+
+            showBookingStatus(
+                savedBookingId
+            )
+
+            return
+        }
+
+        // OLD TEST BOOKING
+        if (
+            bookingId.equals(
+                "NMR-950854",
+                ignoreCase = true
+            )
+        ) {
+
+            showBookingStatus(
+                "NMR-950854"
+            )
+
+            return
+        }
+
+        // NOT FOUND
+        statusText.text =
+            "❌ Booking ID not found\n\n" +
+            "Please check your Booking ID."
+
+        statusText.setTextColor(
+            Color.rgb(198, 40, 40)
+        )
+
+        progressText.text = ""
+    }
+
+    private fun showBookingStatus(
+        bookingId: String
+    ) {
 
         val preferences =
             getSharedPreferences(
@@ -163,9 +210,33 @@ class TrackRepairActivity : AppCompatActivity() {
 
         val status =
             preferences.getString(
-                "status_NMR-950854",
+                "status_$bookingId",
                 "Booking Received"
             ) ?: "Booking Received"
+
+        val name =
+            preferences.getString(
+                "customer_name",
+                ""
+            )
+
+        val brand =
+            preferences.getString(
+                "brand",
+                ""
+            )
+
+        val model =
+            preferences.getString(
+                "model",
+                ""
+            )
+
+        val problem =
+            preferences.getString(
+                "problem",
+                ""
+            )
 
         val icon = when (status) {
 
@@ -183,8 +254,12 @@ class TrackRepairActivity : AppCompatActivity() {
         }
 
         statusText.text =
-            "Booking ID: NMR-950854\n\n" +
-            "Current Status: $icon $status"
+            "Booking ID: $bookingId\n\n" +
+            "Customer: $name\n" +
+            "Mobile: $brand $model\n" +
+            "Problem: $problem\n\n" +
+            "Current Status:\n" +
+            "$icon $status"
 
         statusText.setTextColor(
             when (status) {
@@ -212,7 +287,9 @@ class TrackRepairActivity : AppCompatActivity() {
         updateProgress(status)
     }
 
-    private fun updateProgress(status: String) {
+    private fun updateProgress(
+        status: String
+    ) {
 
         val steps = arrayOf(
             "Booking Received",
@@ -243,7 +320,8 @@ class TrackRepairActivity : AppCompatActivity() {
                 currentStep = 5
         }
 
-        val builder = StringBuilder()
+        val builder =
+            StringBuilder()
 
         for (i in steps.indices) {
 
@@ -260,6 +338,7 @@ class TrackRepairActivity : AppCompatActivity() {
             }
         }
 
-        progressText.text = builder.toString()
+        progressText.text =
+            builder.toString()
     }
 }
