@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Internet -->
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+
+    <!-- Location -->
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
+        android:icon="@drawable/sym_def_app_icon"
         android:label="Nath Mobile Repairing"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
 
         <!-- Splash Screen -->
         <activity
@@ -17,26 +30,35 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action
+                    android:name="android.intent.action.MAIN" />
+
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
 
         </activity>
+
 
         <!-- Main Dashboard -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
+
         <!-- Book A Repair -->
         <activity
             android:name=".BookingActivity"
             android:exported="false" />
 
+
         <!-- Pickup & Delivery -->
         <activity
             android:name=".PickupDeliveryActivity"
             android:exported="false" />
+
 
         <!-- Track My Repair -->
         <activity
