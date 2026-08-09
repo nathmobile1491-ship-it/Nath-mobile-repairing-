@@ -19,18 +19,16 @@ class AdminActivity : AppCompatActivity() {
         root.orientation = LinearLayout.VERTICAL
         root.setBackgroundColor(Color.rgb(244, 246, 249))
 
-        // Header
         val header = TextView(this)
         header.text = "🔐 Nath Mobile - Admin Panel"
         header.textSize = 24f
         header.setTextColor(Color.WHITE)
-        header.setGravity(Gravity.CENTER)
+        header.gravity = Gravity.CENTER
         header.setPadding(20, 35, 20, 35)
         header.setBackgroundColor(Color.rgb(33, 33, 33))
 
         root.addView(header)
 
-        // Title
         val title = TextView(this)
         title.text = "📋 Repair Booking"
         title.textSize = 22f
@@ -39,7 +37,6 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(title)
 
-        // Booking information
         val booking = TextView(this)
 
         booking.text =
@@ -61,20 +58,17 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(booking)
 
-        // Status
         statusText = TextView(this)
 
         statusText.text = "Status: Booking Received ✅"
         statusText.textSize = 19f
         statusText.setTextColor(Color.rgb(46, 125, 50))
-        statusText.setGravity(Gravity.CENTER)
+        statusText.gravity = Gravity.CENTER
         statusText.setPadding(20, 25, 20, 25)
 
         root.addView(statusText)
 
-        // Confirm
         val confirmButton = Button(this)
-
         confirmButton.text = "✅ CONFIRM BOOKING"
 
         confirmButton.setOnClickListener {
@@ -83,9 +77,7 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(confirmButton)
 
-        // Pickup
         val pickupButton = Button(this)
-
         pickupButton.text = "🚚 PICKED UP"
 
         pickupButton.setOnClickListener {
@@ -94,9 +86,7 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(pickupButton)
 
-        // Repair
         val repairButton = Button(this)
-
         repairButton.text = "🔧 IN REPAIR"
 
         repairButton.setOnClickListener {
@@ -105,9 +95,7 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(repairButton)
 
-        // Repaired
         val repairedButton = Button(this)
-
         repairedButton.text = "✅ REPAIRED"
 
         repairedButton.setOnClickListener {
@@ -116,9 +104,7 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(repairedButton)
 
-        // Delivered
         val deliveredButton = Button(this)
-
         deliveredButton.text = "🏠 DELIVERED"
 
         deliveredButton.setOnClickListener {
