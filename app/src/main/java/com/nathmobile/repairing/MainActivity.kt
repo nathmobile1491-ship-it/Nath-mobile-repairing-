@@ -4,12 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
 class MainActivity : AppCompatActivity() {
 
-    // Nath Mobile Repairing ka WhatsApp/Call number
     private val shopPhoneNumber = "919758149149"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,218 +17,118 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        // =========================
-        // MAIN BUTTONS
-        // =========================
+        val btnBookRepair = findViewById<Button>(R.id.btnBookRepair)
+        val btnPickupDelivery = findViewById<Button>(R.id.btnPickupDelivery)
+        val btnTrackRepair = findViewById<Button>(R.id.btnTrackRepair)
 
-        val btnBookRepair =
-            findViewById<Button>(R.id.btnBookRepair)
+        val btnCall = findViewById<Button>(R.id.btnCall)
+        val btnWhatsapp = findViewById<Button>(R.id.btnWhatsapp)
 
-        val btnPickupDelivery =
-            findViewById<Button>(R.id.btnPickupDelivery)
-
-        val btnTrackRepair =
-            findViewById<Button>(R.id.btnTrackRepair)
-
-        // =========================
-        // CALL & WHATSAPP
-        // =========================
-
-        val btnCall =
-            findViewById<Button>(R.id.btnCall)
-
-        val btnWhatsapp =
-            findViewById<Button>(R.id.btnWhatsapp)
-
-        // =========================
-        // SERVICE CARDS
-        // =========================
-
-        val cardDisplay =
-            findViewById<CardView>(R.id.cardDisplay)
-
-        val cardBattery =
-            findViewById<CardView>(R.id.cardBattery)
-
-        val cardWater =
-            findViewById<CardView>(R.id.cardWater)
-
-        val cardSoftware =
-            findViewById<CardView>(R.id.cardSoftware)
-
-        val cardAccessories =
-            findViewById<CardView>(R.id.cardAccessories)
-
-        // =========================
-        // SHOP CARD
-        // =========================
-
-        val cardShop =
-            findViewById<CardView>(R.id.cardShop)
-
-
-        // =========================
-        // 1. BOOK A REPAIR
-        // =========================
+        val cardDisplay = findViewById<CardView>(R.id.cardDisplay)
+        val cardBattery = findViewById<CardView>(R.id.cardBattery)
+        val cardWater = findViewById<CardView>(R.id.cardWater)
+        val cardSoftware = findViewById<CardView>(R.id.cardSoftware)
+        val cardAccessories = findViewById<CardView>(R.id.cardAccessories)
+        val cardShop = findViewById<CardView>(R.id.cardShop)
 
         btnBookRepair.setOnClickListener {
-
-            val intent = Intent(
-                this,
-                BookingActivity::class.java
-            )
-
-            startActivity(intent)
+            startActivity(Intent(this, BookingActivity::class.java))
         }
-
-
-        // =========================
-        // 2. PICKUP & DELIVERY
-        // =========================
 
         btnPickupDelivery.setOnClickListener {
-
-            val intent = Intent(
-                this,
-                PickupDeliveryActivity::class.java
-            )
-
-            startActivity(intent)
+            startActivity(Intent(this, PickupDeliveryActivity::class.java))
         }
-
-
-        // =========================
-        // 3. TRACK MY REPAIR
-        // =========================
 
         btnTrackRepair.setOnClickListener {
-
-            val intent = Intent(
-                this,
-                TrackRepairActivity::class.java
-            )
-
-            startActivity(intent)
+            startActivity(Intent(this, TrackRepairActivity::class.java))
         }
-
-
-        // =========================
-        // 4. CALL
-        // =========================
 
         btnCall.setOnClickListener {
-
-            val intent = Intent(
-                Intent.ACTION_DIAL
-            ).apply {
-
-                data = Uri.parse(
-                    "tel:$shopPhoneNumber"
-                )
-            }
-
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:$shopPhoneNumber")
             startActivity(intent)
         }
 
-
-        // =========================
-        // 5. WHATSAPP
-        // =========================
-
         btnWhatsapp.setOnClickListener {
-
             openWhatsAppWithMessage(
                 "Hi Nath Mobile Repairing, mujhe mobile repair ke baare mein enquiry karni hai."
             )
         }
 
-
-        // =========================
-        // 6. DISPLAY REPAIR
-        // =========================
-
         cardDisplay.setOnClickListener {
-
             openWhatsAppWithMessage(
                 "Hi Nath Mobile Repairing, mujhe Display & Touch Replacement ka price jaan na hai."
             )
         }
 
-
-        // =========================
-        // 7. BATTERY REPAIR
-        // =========================
-
         cardBattery.setOnClickListener {
-
             openWhatsAppWithMessage(
                 "Hi Nath Mobile Repairing, mujhe Battery & Charging Jack repair ka estimate chahiye."
             )
         }
 
-
-        // =========================
-        // 8. WATER / MOTHERBOARD
-        // =========================
-
         cardWater.setOnClickListener {
-
             openWhatsAppWithMessage(
                 "Hi Nath Mobile Repairing, mera phone paani mein gir gaya hai / motherboard repair karwana hai."
             )
         }
 
-
-        // =========================
-        // 9. SOFTWARE
-        // =========================
-
         cardSoftware.setOnClickListener {
-
             openWhatsAppWithMessage(
                 "Hi Nath Mobile Repairing, mujhe Software Unlocking / Flashing ke baare mein puchna hai."
             )
         }
 
-
-        // =========================
-        // 10. ACCESSORIES
-        // =========================
-
         cardAccessories.setOnClickListener {
-
             openWhatsAppWithMessage(
                 "Hi Nath Mobile Repairing, mujhe Mobile Accessories / Glass / Cover chahiye."
             )
         }
 
-
-        // =========================
-        // 11. VISIT OUR SHOP
-        // =========================
-
         cardShop.setOnClickListener {
-
             val mapUrl =
                 "https://www.google.com/maps/search/?api=1&query=Nath+Mobile+Repairing"
 
-            val mapIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(mapUrl)
+            startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl))
             )
-
-            startActivity(mapIntent)
         }
+
+        // ADMIN PANEL
+        addAdminButton()
     }
 
+    private fun addAdminButton() {
 
-    // =========================
-    // WHATSAPP FUNCTION
-    // =========================
+        val root = findViewById<LinearLayout>(android.R.id.content)
 
-    private fun openWhatsAppWithMessage(
-        message: String
-    ) {
+        val adminButton = Button(this)
+
+        adminButton.text = "🔐 ADMIN PANEL"
+        adminButton.textSize = 17f
+        adminButton.setTextColor(android.graphics.Color.WHITE)
+        adminButton.setBackgroundColor(
+            android.graphics.Color.rgb(111, 66, 193)
+        )
+
+        adminButton.setOnClickListener {
+
+            // Admin page
+            val adminUrl =
+                "https://nathmobile1491-ship-it.github.io/Nath-mobile-repairing-/admin.html"
+
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(adminUrl)
+            )
+
+            startActivity(intent)
+        }
+
+        root.addView(adminButton)
+    }
+
+    private fun openWhatsAppWithMessage(message: String) {
 
         val url =
             "https://wa.me/$shopPhoneNumber?text=${Uri.encode(message)}"
