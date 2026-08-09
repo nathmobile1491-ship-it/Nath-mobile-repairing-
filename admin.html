@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nath Mobile - Admin</title>
 
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6f9;font-family:Arial;color:#222}
+.header{background:#222;color:white;padding:20px;font-size:25px;font-weight:bold}
+.container{padding:15px}
+h2{margin-top:10px}
+.card{background:white;border-radius:12px;padding:18px;margin:15px 0;
+box-shadow:0 2px 8px #ccc}
+.row{margin:8px 0;font-size:16px}
+.id{font-size:22px;font-weight:bold;color:#1976d2}
+.status{padding:10px;border-radius:8px;background:#fff3cd;
+font-weight:bold;margin:12px 0}
+button{border:0;border-radius:7px;padding:11px 12px;margin:4px;
+font-weight:bold;color:white}
+.confirm{background:#2e7d32}
+.pickup{background:#1976d2}
+.repair{background:#ef6c00}
+.done{background:#6a1b9a}
+.delivery{background:#00897b}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+📱 Nath Mobile — Admin
+</div>
+
+<div class="container">
+
+<h2>📋 Repair Bookings</h2>
+
+<div class="card">
+
+<div class="id">NMR-950854</div>
+
+<div class="row">👤 <b>Customer:</b> adi</div>
+<div class="row">📞 <b>Phone:</b> 7037746519</div>
+<div class="row">📱 <b>Brand:</b> Oppo</div>
+<div class="row">📱 <b>Model:</b> Ip12 Pro</div>
+<div class="row">🔧 <b>Problem:</b> Battery change</div>
+<div class="row">📍 <b>Address:</b> 2828 Lakhi Bagh</div>
+<div class="row">🏠 <b>Landmark:</b> Sham Shan Ghat</div>
+<div class="row">📅 <b>Pickup:</b> 13/08/2026</div>
+<div class="row">⏰ <b>Time:</b> 16:41</div>
+
+<div id="status" class="status">
+Status: Booking Received
+</div>
+
+<button class="confirm" onclick="setStatus('Booking Confirmed')">
+✅ Confirm
+</button>
+
+<button class="pickup" onclick="setStatus('Picked Up')">
+🚚 Picked Up
+</button>
+
+<button class="repair" onclick="setStatus('In Repair')">
+🔧 In Repair
+</button>
+
+<button class="done" onclick="setStatus('Repaired')">
+✅ Repaired
+</button>
+
+<button class="delivery" onclick="setStatus('Delivered')">
+🏠 Delivered
+</button>
+
+</div>
+
+</div>
+
+<script>
+function setStatus(text){
+  document.getElementById("status").innerText="Status: "+text;
+  localStorage.setItem("repairStatus",text);
+}
+
+let saved=localStorage.getItem("repairStatus");
+if(saved){
+ document.getElementById("status").innerText="Status: "+saved;
+}
+</script>
+
+</body>
+</html>
