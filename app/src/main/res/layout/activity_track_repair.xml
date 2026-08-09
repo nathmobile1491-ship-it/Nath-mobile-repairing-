@@ -1,1 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
 
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F6F9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔍 Track My Repair"
+            android:textColor="#1976D2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter your Booking ID to check your repair status."
+            android:textColor="#555555"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/edtBookingId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Booking ID (Example: NMR-123456)"
+            android:inputType="text"
+            android:padding="16dp"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btnTrack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔍 CHECK REPAIR STATUS"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your repair status will appear here."
+            android:textColor="#333333"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:padding="24dp"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btnWhatsApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💬 ASK ON WHATSAPP"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+
+</ScrollView>
