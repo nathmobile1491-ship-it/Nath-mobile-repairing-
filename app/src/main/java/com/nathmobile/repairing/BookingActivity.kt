@@ -35,25 +35,32 @@ class BookingActivity : AppCompatActivity() {
         val btnSubmitBooking = findViewById<Button>(R.id.btnSubmitBooking)
         val checkTerms = findViewById<CheckBox>(R.id.checkTerms)
 
-        // PHOTO
+        // PHOTO BUTTON
         btnAddPhoto.setOnClickListener {
             Toast.makeText(
                 this,
-                "Photo upload feature next step mein connect karenge.",
+                "Photo upload feature next step mein add karenge.",
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        // DATE
+        // PICKUP DATE
         edtPickupDate.setOnClickListener {
+
             val calendar = Calendar.getInstance()
 
             DatePickerDialog(
                 this,
-                { _, year, month, day ->
-                    edtPickupDate.setText(
-                        String.format("%02d/%02d/%04d", day, month + 1, year)
+                { _, year, month, dayOfMonth ->
+
+                    val date = String.format(
+                        "%02d/%02d/%04d",
+                        dayOfMonth,
+                        month + 1,
+                        year
                     )
+
+                    edtPickupDate.setText(date)
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -61,16 +68,22 @@ class BookingActivity : AppCompatActivity() {
             ).show()
         }
 
-        // TIME
+        // PICKUP TIME
         edtPickupTime.setOnClickListener {
+
             val calendar = Calendar.getInstance()
 
             TimePickerDialog(
                 this,
-                { _, hour, minute ->
-                    edtPickupTime.setText(
-                        String.format("%02d:%02d", hour, minute)
+                { _, hourOfDay, minute ->
+
+                    val time = String.format(
+                        "%02d:%02d",
+                        hourOfDay,
+                        minute
                     )
+
+                    edtPickupTime.setText(time)
                 },
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
@@ -91,99 +104,111 @@ class BookingActivity : AppCompatActivity() {
             val pickupDate = edtPickupDate.text.toString().trim()
             val pickupTime = edtPickupTime.text.toString().trim()
 
+            // NAME
             if (name.isEmpty()) {
                 edtName.error = "Name enter karein"
                 edtName.requestFocus()
                 return@setOnClickListener
             }
 
-            if (phone.length != 10) {
+            // PHONE
+            if (!phone.matches(Regex("^[0-9]{10}$"))) {
                 edtPhone.error = "10 digit mobile number enter karein"
                 edtPhone.requestFocus()
                 return@setOnClickListener
             }
 
+            // BRAND
             if (brand.isEmpty()) {
                 edtBrand.error = "Mobile brand enter karein"
                 edtBrand.requestFocus()
                 return@setOnClickListener
             }
 
+            // MODEL
             if (model.isEmpty()) {
                 edtModel.error = "Mobile model enter karein"
                 edtModel.requestFocus()
                 return@setOnClickListener
             }
 
+            // PROBLEM
             if (problem.isEmpty()) {
                 edtProblem.error = "Repair problem enter karein"
                 edtProblem.requestFocus()
                 return@setOnClickListener
             }
 
+            // ADDRESS
             if (address.isEmpty()) {
                 edtAddress.error = "Pickup address enter karein"
                 edtAddress.requestFocus()
                 return@setOnClickListener
             }
 
+            // DATE
             if (pickupDate.isEmpty()) {
                 edtPickupDate.error = "Pickup date select karein"
+                edtPickupDate.requestFocus()
                 return@setOnClickListener
             }
 
+            // TIME
             if (pickupTime.isEmpty()) {
                 edtPickupTime.error = "Pickup time select karein"
+                edtPickupTime.requestFocus()
                 return@setOnClickListener
             }
 
+            // TERMS
             if (!checkTerms.isChecked) {
                 Toast.makeText(
                     this,
                     "Please confirm the information.",
                     Toast.LENGTH_SHORT
                 ).show()
+
                 return@setOnClickListener
             }
 
-            // Booking ID
+            // BOOKING ID
             val bookingId = "NMR-" +
                     (System.currentTimeMillis() % 1000000)
 
-            // WhatsApp message
+            // WHATSAPP MESSAGE
             val message = """
                 🔧 *NEW REPAIR BOOKING*
                 
                 *Booking ID:* $bookingId
                 
-                👤 Name: $name
-                📞 Customer Phone: $phone
+                👤 *Customer Name:* $name
+                📞 *Customer Phone:* $phone
                 
-                📱 Brand: $brand
-                📱 Model: $model
+                📱 *Brand:* $brand
+                📱 *Model:* $model
                 
-                🔧 Problem:
+                🔧 *Repair Problem:*
                 $problem
                 
-                📍 Pickup Address:
+                📍 *Pickup Address:*
                 $address
                 
-                🏠 Landmark:
+                🏠 *Landmark:*
                 $landmark
                 
-                📅 Pickup Date: $pickupDate
-                ⏰ Pickup Time: $pickupTime
+                📅 *Pickup Date:* $pickupDate
+                ⏰ *Pickup Time:* $pickupTime
                 
-                🚚 Service: Pickup & Delivery
+                🚚 *Service:* Pickup & Delivery
                 
                 Please confirm this repair booking.
             """.trimIndent()
 
             val whatsappUrl =
-                "https://wa.me/91$shopPhoneNumber?text=" +
-                        Uri.encode(message)
+                "https://wa.me/91$shopPhoneNumber?text=${Uri.encode(message)}"
 
             try {
+
                 val intent = Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse(whatsappUrl)
