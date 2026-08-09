@@ -1,11 +1,11 @@
 package com.nathmobile.repairing
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -13,10 +13,10 @@ class AdminActivity : AppCompatActivity() {
 
     private lateinit var statusText: TextView
 
+    private val bookingId = "NMR-950854"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val scrollView = ScrollView(this)
 
         val root = LinearLayout(this)
         root.orientation = LinearLayout.VERTICAL
@@ -43,7 +43,7 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(title)
 
-        // BOOKING CARD
+        // BOOKING DETAILS
         val booking = TextView(this)
 
         booking.text =
@@ -65,46 +65,43 @@ class AdminActivity : AppCompatActivity() {
 
         root.addView(booking)
 
-        // CURRENT STATUS
+        // STATUS
         statusText = TextView(this)
-
-        statusText.text = "CURRENT STATUS\n\n🟡 Booking Received"
         statusText.textSize = 19f
         statusText.gravity = Gravity.CENTER
-        statusText.setTextColor(Color.rgb(245, 124, 0))
         statusText.setPadding(15, 25, 15, 25)
 
         root.addView(statusText)
+
+        // LOAD SAVED STATUS
+        showSavedStatus()
 
         // CONFIRM
         val confirmButton = Button(this)
         confirmButton.text = "✅ CONFIRM BOOKING"
 
         confirmButton.setOnClickListener {
-            statusText.text = "CURRENT STATUS\n\n🟢 Booking Confirmed"
-            statusText.setTextColor(Color.rgb(46, 125, 50))
+            saveStatus("Booking Confirmed")
         }
 
         root.addView(confirmButton)
 
-        // PICKUP
+        // PICKED UP
         val pickupButton = Button(this)
         pickupButton.text = "🚚 PICKED UP"
 
         pickupButton.setOnClickListener {
-            statusText.text = "CURRENT STATUS\n\n🚚 Picked Up"
-            statusText.setTextColor(Color.rgb(2, 119, 189))
+            saveStatus("Picked Up")
         }
 
         root.addView(pickupButton)
 
-        // REPAIR
+        // IN REPAIR
         val repairButton = Button(this)
         repairButton.text = "🔧 IN REPAIR"
 
         repairButton.setOnClickListener {
-            statusText.text = "CURRENT STATUS\n\n🔧 Repair In Progress"
-            statusText.setTextColor(Color.rgb(123, 31, 162))
+            saveStatus("Repair In Progress")
         }
 
         root.addView(repairButton)
@@ -114,8 +111,7 @@ class AdminActivity : AppCompatActivity() {
         readyButton.text = "✅ READY FOR DELIVERY"
 
         readyButton.setOnClickListener {
-            statusText.text = "CURRENT STATUS\n\n✅ Ready for Delivery"
-            statusText.setTextColor(Color.rgb(46, 125, 50))
+            saveStatus("Ready for Delivery")
         }
 
         root.addView(readyButton)
@@ -125,8 +121,7 @@ class AdminActivity : AppCompatActivity() {
         deliveredButton.text = "🏠 DELIVERED"
 
         deliveredButton.setOnClickListener {
-            statusText.text = "CURRENT STATUS\n\n🏠 Delivered"
-            statusText.setTextColor(Color.rgb(27, 94, 32))
+            saveStatus("Delivered")
         }
 
         root.addView(deliveredButton)
@@ -136,14 +131,90 @@ class AdminActivity : AppCompatActivity() {
         resetButton.text = "🔄 RESET STATUS"
 
         resetButton.setOnClickListener {
-            statusText.text = "CURRENT STATUS\n\n🟡 Booking Received"
-            statusText.setTextColor(Color.rgb(245, 124, 0))
+            saveStatus("Booking Received")
         }
 
         root.addView(resetButton)
 
-        scrollView.addView(root)
+        setContentView(root)
+    }
 
-        setContentView(scrollView)
+    private fun saveStatus(status: String) {
+
+        val preferences =
+            getSharedPreferences(
+                "repair_data",
+                Context.MODE_PRIVATE
+            )
+
+        preferences.edit()
+            .putString(
+                "status_$bookingId",
+                status
+            )
+            .apply()
+
+        showStatus(status)
+    }
+
+    private fun showSavedStatus() {
+
+        val preferences =
+            getSharedPreferences(
+                "repair_data",
+                Context.MODE_PRIVATE
+            )
+
+        val savedStatus =
+            preferences.getString(
+                "status_$bookingId",
+                "Booking Received"
+            )
+
+        showStatus(savedStatus ?: "Booking Received")
+    }
+
+    private fun showStatus(status: String) {
+
+        val icon = when (status) {
+
+            "Booking Confirmed" -> "🟢"
+
+            "Picked Up" -> "🚚"
+
+            "Repair In Progress" -> "🔧"
+
+            "Ready for Delivery" -> "✅"
+
+            "Delivered" -> "🏠"
+
+            else -> "🟡"
+        }
+
+        statusText.text =
+            "CURRENT STATUS\n\n$icon $status"
+
+        statusText.setTextColor(
+            when (status) {
+
+                "Booking Confirmed" ->
+                    Color.rgb(46, 125, 50)
+
+                "Picked Up" ->
+                    Color.rgb(2, 119, 189)
+
+                "Repair In Progress" ->
+                    Color.rgb(123, 31, 162)
+
+                "Ready for Delivery" ->
+                    Color.rgb(46, 125, 50)
+
+                "Delivered" ->
+                    Color.rgb(27, 94, 32)
+
+                else ->
+                    Color.rgb(245, 124, 0)
+            }
+        )
     }
 }
