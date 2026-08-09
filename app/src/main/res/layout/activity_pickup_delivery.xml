@@ -58,6 +58,17 @@
             android:gravity="top"
             android:padding="14dp"/>
 
+        <Button
+            android:id="@+id/btnCurrentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#1976D2"
+            android:text="📍 USE MY LOCATION"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
         <EditText
             android:id="@+id/edtPickupLandmark"
             android:layout_width="match_parent"
