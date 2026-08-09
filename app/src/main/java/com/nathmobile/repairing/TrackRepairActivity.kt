@@ -1,5 +1,6 @@
 package com.nathmobile.repairing
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -17,15 +18,21 @@ class TrackRepairActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val root = LinearLayout(this)
+
         root.orientation = LinearLayout.VERTICAL
         root.setPadding(20, 30, 20, 30)
-        root.setBackgroundColor(Color.rgb(244, 246, 249))
+        root.setBackgroundColor(
+            Color.rgb(244, 246, 249)
+        )
 
         // HEADER
         val header = TextView(this)
+
         header.text = "🔎 Track My Repair"
         header.textSize = 28f
-        header.setTextColor(Color.rgb(30, 136, 229))
+        header.setTextColor(
+            Color.rgb(30, 136, 229)
+        )
         header.gravity = Gravity.CENTER
         header.setPadding(10, 20, 10, 20)
 
@@ -33,7 +40,10 @@ class TrackRepairActivity : AppCompatActivity() {
 
         // DESCRIPTION
         val description = TextView(this)
-        description.text = "Enter your Booking ID to check your repair status."
+
+        description.text =
+            "Enter your Booking ID to check your repair status."
+
         description.textSize = 17f
         description.setTextColor(Color.DKGRAY)
         description.gravity = Gravity.CENTER
@@ -43,6 +53,7 @@ class TrackRepairActivity : AppCompatActivity() {
 
         // BOOKING ID
         val bookingInput = EditText(this)
+
         bookingInput.hint = "Enter Booking ID"
         bookingInput.textSize = 18f
         bookingInput.setSingleLine(true)
@@ -51,29 +62,40 @@ class TrackRepairActivity : AppCompatActivity() {
 
         // CHECK BUTTON
         val checkButton = Button(this)
-        checkButton.text = "🔎 CHECK REPAIR STATUS"
+
+        checkButton.text =
+            "🔎 CHECK REPAIR STATUS"
 
         root.addView(checkButton)
 
         // RESULT
         statusText = TextView(this)
-        statusText.text = ""
+
         statusText.textSize = 19f
         statusText.gravity = Gravity.CENTER
-        statusText.setPadding(15, 30, 15, 30)
+        statusText.setPadding(
+            15,
+            30,
+            15,
+            30
+        )
 
         root.addView(statusText)
 
-        // WHATSAPP BUTTON
+        // WHATSAPP
         val whatsappButton = Button(this)
-        whatsappButton.text = "💬 ASK ON WHATSAPP"
+
+        whatsappButton.text =
+            "💬 ASK ON WHATSAPP"
 
         root.addView(whatsappButton)
 
         checkButton.setOnClickListener {
 
             val bookingId =
-                bookingInput.text.toString().trim()
+                bookingInput.text
+                    .toString()
+                    .trim()
 
             if (bookingId.isEmpty()) {
 
@@ -87,20 +109,14 @@ class TrackRepairActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (bookingId.equals(
+            if (
+                bookingId.equals(
                     "NMR-950854",
                     ignoreCase = true
                 )
             ) {
 
-                statusText.text =
-                    "Booking ID: NMR-950854\n\n" +
-                    "Status: 🟡 Booking Received\n\n" +
-                    "Our team will contact you shortly."
-
-                statusText.setTextColor(
-                    Color.rgb(245, 124, 0)
-                )
+                showBookingStatus()
 
             } else {
 
@@ -129,5 +145,64 @@ class TrackRepairActivity : AppCompatActivity() {
         }
 
         setContentView(root)
+    }
+
+    private fun showBookingStatus() {
+
+        val preferences =
+            getSharedPreferences(
+                "repair_data",
+                Context.MODE_PRIVATE
+            )
+
+        val status =
+            preferences.getString(
+                "status_NMR-950854",
+                "Booking Received"
+            )
+
+        val icon = when (status) {
+
+            "Booking Confirmed" -> "🟢"
+
+            "Picked Up" -> "🚚"
+
+            "Repair In Progress" -> "🔧"
+
+            "Ready for Delivery" -> "✅"
+
+            "Delivered" -> "🏠"
+
+            else -> "🟡"
+        }
+
+        statusText.text =
+            "Booking ID: NMR-950854\n\n" +
+            "Status: $icon $status\n\n" +
+            "Our team will contact you shortly."
+
+        statusText.setTextColor(
+
+            when (status) {
+
+                "Booking Confirmed" ->
+                    Color.rgb(46, 125, 50)
+
+                "Picked Up" ->
+                    Color.rgb(2, 119, 189)
+
+                "Repair In Progress" ->
+                    Color.rgb(123, 31, 162)
+
+                "Ready for Delivery" ->
+                    Color.rgb(46, 125, 50)
+
+                "Delivered" ->
+                    Color.rgb(27, 94, 32)
+
+                else ->
+                    Color.rgb(245, 124, 0)
+            }
+        )
     }
 }
